@@ -1,0 +1,113 @@
+import json
+import os
+
+# File to store card data
+DATA_FILE = "card_data.json"
+
+# Predefined default cards
+default_cards = {
+    "4111111111111111": {"pin": "1234", "balance": 10000},
+    "4012888888881881": {"pin": "4321", "balance": 5000},
+    "4222222222222": {"pin": "0000", "balance": 2500}
+}
+
+# Load or initialize card data
+if os.path.exists(DATA_FILE):
+    with open(DATA_FILE, "r") as file:
+        card_data = json.load(file)
+    for card, info in default_cards.items():
+        if card not in card_data:
+            card_data[card] = info
+else:
+    card_data = default_cards.copy()
+
+# Function to validate credit card number using Luhn's algorithm
+def is_valid_card(card_number):
+    reversed_card = card_number[::-1]
+    odd_sum = sum(int(n) for n in reversed_card[::2])
+    even_sum = 0
+    for n in reversed_card[1::2]:
+        double = int(n) * 2
+        even_sum += double if double < 10 else 1 + (double % 10)
+    return (odd_sum + even_sum) % 10 == 0
+
+# Main program loop
+while True:
+    card_number = input("Enter your credit card number: ").strip().replace("-", "").replace(" ", "")
+    
+    if card_number.isdigit() and is_valid_card(card_number):
+        print("✅ Credit card number is valid.")
+        
+        if card_number in card_data:
+            # Existing card - PIN verification
+            for attempt in range(3):
+                pin = input("Enter your PIN: ").strip()
+                if pin == card_data[card_number]["pin"]:
+                    print("✅ PIN is correct.")
+
+                    # Transaction loop
+                    while True:
+                        print("\n💳 Transaction Menu:")
+                        print("1. Check Balance")
+                        print("2. Deposit")
+                        print("3. Withdraw")
+                        print("4. Exit")
+                        
+                        choice = input("Choose an option (1–4): ")
+
+                        if choice == "1":
+                            print(f"💰 Your balance is: {card_data[card_number]['balance']} KES")
+
+                        elif choice == "2":
+                            amount = input("Enter amount to deposit: ").strip()
+                            if amount.isdigit():
+                                card_data[card_number]['balance'] += int(amount)
+                                print("✅ Deposit successful.")
+                            else:
+                                print("❌ Invalid amount.")
+
+                        elif choice == "3":
+                            amount = input("Enter amount to withdraw: ").strip()
+                            if amount.isdigit():
+                                amount = int(amount)
+                                if amount <= card_data[card_number]['balance']:
+                                    card_data[card_number]['balance'] -= amount
+                                    print("✅ Withdrawal successful.")
+                                else:
+                                    print("❌ Insufficient balance.")
+                            else:
+                                print("❌ Invalid amount.")
+
+                        elif choice == "4":
+                            print("👋 Thank you for using our service.")
+                            with open(DATA_FILE, "w") as file:
+                                json.dump(card_data, file, indent=4)
+                            exit()
+                        else:
+                            print("❌ Invalid option. Please try again.")
+                    
+                    break  # Exit the PIN attempt loop after successful login
+                else:
+                    print(f"❌ Incorrect PIN. Attempts left: {2 - attempt}")
+            else:
+                print("🚫 Too many incorrect attempts. Access denied.")
+                exit()
+
+        else:
+            # New card registration
+            pin = input("Card not found. Enter a 4-digit PIN to register: ").strip()
+            while not (pin.isdigit() and len(pin) == 4):
+                pin = input("Invalid PIN. Enter a valid 4-digit PIN: ").strip()
+            card_data[card_number] = {"pin": pin, "balance": 0}
+            print("✅ New card registered with 0 KES balance.")
+            
+            # Save new card data
+            with open(DATA_FILE, "w") as file:
+                json.dump(card_data, file, indent=4)
+
+    else:
+        print("❌ Invalid card number. Please try again.")
+
+    # Save changes after each loop
+    with open(DATA_FILE, "w") as file:
+        json.dump(card_data, file, indent=4)

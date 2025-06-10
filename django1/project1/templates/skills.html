@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Ann</title>
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> -->
+  <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+  <nav>
+    <h1><span style="color: #0ff;">A</span>nn</h1>
+    <ul>
+      <li><a href="/">Home</a></li>      
+      <li><a href="/about">About</a></li>      
+      <li><a href="/skills">My Skills</a></li>
+      <li><a href="#">Projects</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Skills</h2>
+    {% comment %} <section>
+      <p>I am Ann Karanja, a passionate Web Developer with strong capabilities in both Data Science and Backend Development. I combine analytical thinking with robust engineering skills to build intelligent, data-driven applications and powerful backend systems.</p>
+    </section> {% endcomment %}
+
+    <section>
+      <h2>Data Science Skills</h2>
+      <ul>
+        <li>Data Wrangling (Pandas, NumPy)</li>
+        <li>Statistical Analysis & Hypothesis Testing</li>
+        <li>Data Visualization (Matplotlib, Seaborn, Plotly)</li>
+        <li>Machine Learning (Scikit-learn, TensorFlow, Keras)</li>
+        <li>Deep Learning (Neural Networks, CNNs, RNNs)</li>
+        <li>NLP (Natural Language Processing with spaCy, NLTK)</li>
+        <li>Big Data Tools (Spark, Hadoop basics)</li>
+        <li>Model Deployment (Flask, FastAPI, Streamlit)</li>
+        <li>Data Engineering (ETL Pipelines, Airflow basics)</li>
+        <li>Working with APIs and scraping (BeautifulSoup, Requests)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Backend Development Skills</h2>
+      <ul>
+        <li>Python, Django, Flask</li>
+        <li>Node.js with Express</li>
+        <li>Database Design (PostgreSQL, MySQL, SQLite, MongoDB)</li>
+        <li>Authentication & Authorization (JWT, OAuth2)</li>
+        <li>RESTful APIs & GraphQL</li>
+        <li>Docker & Containerization</li>
+        <li>CI/CD with GitHub Actions, Docker Compose</li>
+        <li>Testing (Unit, Integration – Pytest, Postman)</li>
+        <li>Version Control (Git, GitHub)</li>
+        <li>Cloud Basics (Heroku, AWS EC2/S3, Render)</li>
+      </ul>
+    </section>
+  </main>
+  <!-- <script src="{% static 'js/script.js'%}"></script>  -->
+</body>
+</html>

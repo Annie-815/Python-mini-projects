@@ -1,0 +1,51 @@
+/* #contact {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #111;
+  color: #fff;
+}
+
+.social-icons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: baseline;
+  gap: 1rem;
+}
+
+.social-icons a {
+  color: #0ff;
+  font-size: 2rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #fff;
+  transform: scale(1.2);
+} */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* pushes social icons to the bottom */
+  height: 100vh; /* full height of the screen */
+  padding: 20px;
+  background-color: #0f0f0f;
+}
+
+.nav-links a {
+  display: block;
+  margin: 10px 0;
+  color: #00ffff;
+  text-decoration: none;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: auto;
+}
+
+.social-icons a {
+  color: #00ffff;
+  font-size: 24px;
+}
